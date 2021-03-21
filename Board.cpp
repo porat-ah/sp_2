@@ -23,7 +23,7 @@ namespace ariel{
      Board::~Board(){
      }
 
-    void Board::post(int row , int col , Direction dir , string message){
+    void Board::post(uint32_t row , uint32_t col , Direction dir , std::string message){
         const size_t ROW_NORM = 98;
         const size_t COL_NORM = 198;
         if (row < ROW_NORM || col < COL_NORM)
@@ -50,7 +50,7 @@ namespace ariel{
                 break;
         }
     }
-    string Board::read(int row , int col , Direction dir , int len){
+    string Board::read(uint32_t row , uint32_t col , Direction dir , uint32_t len){
         const size_t ROW_NORM = 98;
         const size_t COL_NORM = 198;
          if (row < ROW_NORM || col < COL_NORM)

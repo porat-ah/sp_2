@@ -15,8 +15,8 @@ namespace ariel{
         public:
             Board();
             ~Board();
-            void post(int row , int col , Direction dir , std::string message);
-            std::string read(int row , int col , Direction dir , int len);
+            void post(uint32_t row , uint32_t col , Direction dir , std::string message);
+            std::string read(uint32_t row , uint32_t col , Direction dir , uint32_t len);
             void show();
     };
 }
