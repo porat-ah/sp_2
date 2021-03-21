@@ -1,6 +1,7 @@
 #include "doctest.h"
 #include "Board.hpp"
 #include "Direction.hpp"
+#include <stdexcept>
 #define hor Direction::Horizontal
 #define ver Direction::Vertical
 using namespace ariel;
@@ -74,4 +75,18 @@ TEST_CASE("middle read (ver)"){
     Board board;
     board.post(3,0,ver,"ab");
     CHECK(board.read(2,0,hor,5)=="_ab_");//23
+}
+
+TEST_CASE("bad input"){
+    Board board;
+    CHECK_THROWS_AS(board.read(-1,1,hor,4),std::invalid_argument);
+    CHECK_THROWS_AS(board.read(1,-1,hor,4),std::invalid_argument);
+    CHECK_THROWS_AS(board.read(1,1,hor,-4),std::invalid_argument);
+    CHECK_THROWS_AS(board.post(-1,1,hor,"aaa"),std::invalid_argument);
+    CHECK_THROWS_AS(board.post(1,-1,hor,"aaa"),std::invalid_argument);
+    CHECK_THROWS_AS(board.read(-1,1,ver,4),std::invalid_argument);
+    CHECK_THROWS_AS(board.read(1,-1,ver,4),std::invalid_argument);
+    CHECK_THROWS_AS(board.read(1,1,ver,-4),std::invalid_argument);
+    CHECK_THROWS_AS(board.post(-1,1,ver,"aaa"),std::invalid_argument);
+    CHECK_THROWS_AS(board.post(1,-1,ver,"aaa"),std::invalid_argument);
 }

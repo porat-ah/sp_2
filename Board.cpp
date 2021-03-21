@@ -1,27 +1,26 @@
 #include "Board.hpp"
 #include <iostream>
 
-#define hor Direction::Horizontal
-#define ver Direction::Vertical
+
 
 using namespace std;
 
 using ariel::Direction;
+const Direction hor = Direction::Horizontal;
+const Direction ver = Direction::Vertical;
 
 namespace ariel{
-    Board::Board()
+    Board::Board():board{{{'_'}}}
     {
-        board = new array<std::array<char,9>,5>;
-        for (size_t i = 0; i < 5; i++)
+        for (size_t i = 0; i < row_num; i++)
                 {
-                    for (size_t j = 0; j < 9; j++)
+                    for (size_t j = 0; j < col_num; j++)
                     {
-                        board->at(i).at(j) = '_';
+                        board.at(i).at(j) = '_';
                     }
                 }
     }
      Board::~Board(){
-         delete board;
      }
 
     void Board::post(int row , int col , Direction dir , string message){
@@ -38,7 +37,7 @@ namespace ariel{
         case hor:
             for (size_t i = start_col; i < message.length() + start_col ; i++)
             {
-                board->at(start_row).at(i) = message.at(i-start_col);
+                board.at(start_row).at(i) = message.at(i-start_col);
             }
             cout << endl;
             break;
@@ -46,7 +45,7 @@ namespace ariel{
        case ver:
             for (size_t i = start_row; i < message.length() + start_row ; i++)
                 {
-                    board->at(i).at(start_col) = message.at(i-start_row);
+                    board.at(i).at(start_col) = message.at(i-start_row);
                 }
                 break;
         }
@@ -66,24 +65,24 @@ namespace ariel{
         case hor:
             for (size_t i = start_col ; i < start_col+(size_t)len; i++)
             {
-                out +=board->at(start_row).at(i);
+                out +=board.at(start_row).at(i);
             }
             break;
         case Direction::Vertical:
             for (size_t i = start_row; i < start_row+(size_t)len; i++)
             {
-                out += board->at(i).at(start_col);
+                out += board.at(i).at(start_col);
             }
             break;
         }
         return out;
     }
     void Board::show(){
-                for (size_t i = 0; i < 5; i++)
+                for (size_t i = 0; i < row_num; i++)
                 {
-                    for (size_t j = 0; j < 9; j++)
+                    for (size_t j = 0; j < col_num; j++)
                     {
-                        cout << board->at(i).at(j);
+                        cout << board.at(i).at(j);
                     }
                     cout << endl;
                 }
